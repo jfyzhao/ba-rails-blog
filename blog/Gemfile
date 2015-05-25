@@ -37,6 +37,9 @@ group :development, :test do
   # Add Rspec for validating models and testing controllers
   gem 'rspec-rails'
 
+  # Add FactoryGirl to generate fixtures for testing
+  gem 'factory_girl_rails'
+
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
 
