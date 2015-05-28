@@ -1,16 +1,7 @@
-<h1>Listing Comments</h1>
-
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Text</th>
-    <th colspan="3"></th>
-  </tr>
+<h2>Comments</h2>
+<%= render @article.comments %>
  
-  <% @comments.each do |comment| %>
-    <tr>
-      <td><%= comment.commenter %></td>
-      <td><%= comment.body %></td>
-    </tr>
-  <% end %>
-</table>
+<h2>Add a comment:</h2>
+<%= render 'comments/form' %>
+
+<%= link_to 'Back', article_path(@article) %>

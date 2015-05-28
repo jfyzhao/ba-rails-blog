@@ -1,12 +1,14 @@
 # Creates a factory article to use in specs
 FactoryGirl.define do
-  factory :comment do |f|
-    f.commenter "Jeffrey"
-    f.body "This is a great article!"
+  factory :comment do
+    commenter "Jeffrey"
+    body "This is a great article!"
+    article
+    #association :article_id, factory: :article
   end
 
   # Invalid comment factory
-  factory :invalid_comment, parent: :comment do |f|
-    f.commenter nil
+  factory :invalid_comment, parent: :comment do
+    commenter nil
   end
 end
