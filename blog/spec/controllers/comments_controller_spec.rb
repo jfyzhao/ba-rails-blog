@@ -64,5 +64,12 @@ RSpec.describe CommentsController, type: :controller do
         delete :destroy, { id: @comment, article_id: article.id }
       }.to change(Comment,:count).by(-1)
     end
+
+    it "redirects to comments for article" do
+      article = FactoryGirl.create(:article)
+      @comment = FactoryGirl.create(:comment, :article_id => article.id)
+      delete :destroy, { id: @comment, article_id: article.id }
+      expect(response).to redirect_to article_comments_path(article)
+    end      
   end
 end
