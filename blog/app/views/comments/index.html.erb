@@ -1,5 +1,18 @@
 <h2>Comments</h2>
-<%= render @article.comments %>
+<!--%= render @article.comments %-->
+
+<% i = 0 %>
+<!-- Renders article comments and adds the appropriate like/unlike button based on bttn_display array-->
+<% for comment in @article.comments %>
+  <%= render comment %>
+  <% if @bttn_display[i] == 0 %>
+    <%= link_to 'Like', save_vote_article_comment_path(@article, comment), method: :post %>
+  <% else %>
+    <%= link_to 'Unlike', save_vote_article_comment_path(@article, comment), method: :post %>
+  <% end %>
+  <div>This comment has been liked <%= Like.where(:comment_id => comment.id, :liked => 1).count %> time(s)</div>
+  <% i = i+1 %> 
+<% end %>
  
 <h2>Add a comment:</h2>
 <%= render 'comments/form' %>

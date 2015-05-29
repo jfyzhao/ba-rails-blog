@@ -6,8 +6,9 @@ class ArticlesController < ApplicationController
   def show
     @article = Article.find(params[:id])
 
+    # Get user IP and determine if user has liked article already
     @ip = request.remote_ip.to_s
-    @bttn_display = lookup_or_save(@ip, @article.id)
+    @bttn_display = lookup_like(@ip, @article.id)
   end
 
   def new
@@ -50,7 +51,7 @@ class ArticlesController < ApplicationController
     # Need to reinitialize all instance vars here since not using sessions
     @article = Article.find(params[:id])
     @ip = request.remote_ip.to_s
-    @bttn_display = lookup_or_save(@ip, @article.id)
+    @bttn_display = lookup_like(@ip, @article.id)
     # If a user hasn't liked a post
     if @bttn_display == 0
       # Updates or creates a new row
@@ -74,8 +75,8 @@ class ArticlesController < ApplicationController
 
     # Looks up if there already exists a like for an entry
     # and returns 1 if there is
-    def lookup_or_save(ip,article_id)
-      search = Like.find_by(user: @ip, article_id: @article.id)
+    def lookup_like(ip,article_id)
+      search = Like.find_by(user: ip, article_id: article_id)
       if (search == nil || search.liked == 0)
         return 0
       else

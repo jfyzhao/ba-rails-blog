@@ -5,7 +5,11 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   resources :posts, controller: 'articles', as: 'articles' do
-    resources :comments
+    resources :comments do
+      member do
+        post 'save_vote'
+      end
+    end
     resources :likes
     member do
       post 'save_vote'
