@@ -6,6 +6,10 @@ Rails.application.routes.draw do
 
   resources :posts, controller: 'articles', as: 'articles' do
     resources :comments
+    resources :likes
+    member do
+      post 'save_vote'
+    end
   end
 
   # You can have the root of your site routed with "root"

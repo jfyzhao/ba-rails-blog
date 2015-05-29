@@ -11,3 +11,9 @@
 <%= link_to 'Edit', edit_article_path(@article) %> |
 <%= link_to 'Back', articles_path %>
 <%= link_to 'Comments', article_comments_path(@article) %>
+
+<% if @bttn_display == 0 %>
+  <%= link_to 'Like', save_vote_article_path(@article, @bttn_display), method: :post %>
+<% else %>
+  <%= link_to 'Unlike', save_vote_article_path(@article, @bttn_display), method: :post %>
+<% end %>
