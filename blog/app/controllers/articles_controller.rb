@@ -47,6 +47,7 @@ class ArticlesController < ApplicationController
 
   # Saves the like or unlike on click of the like button
   def save_vote
+    # Need to reinitialize all instance vars here since not using sessions
     @article = Article.find(params[:id])
     @ip = request.remote_ip.to_s
     @bttn_display = lookup_or_save(@ip, @article.id)
@@ -71,6 +72,8 @@ class ArticlesController < ApplicationController
       params.require(:article).permit(:title, :text)
     end
 
+    # Looks up if there already exists a like for an entry
+    # and returns 1 if there is
     def lookup_or_save(ip,article_id)
       search = Like.find_by(user: @ip, article_id: @article.id)
       if (search == nil || search.liked == 0)

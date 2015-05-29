@@ -17,3 +17,6 @@
 <% else %>
   <%= link_to 'Unlike', save_vote_article_path(@article, @bttn_display), method: :post %>
 <% end %>
+<div>
+  This post has been liked <%= Like.where(:article_id => @article.id, :liked => 1).count %> time(s)
+</div>
